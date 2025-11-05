@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Good Deeds Stories</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+      color: #333;
+    }
+    header {
+      background-color: #4a90e2;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      font-size: 2rem;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+    h2 {
+      color: #4a90e2;
+      margin-bottom: 1rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    input[type="text"],
+    textarea,
+    select {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 2px solid #4a90e2;
+      border-radius: 8px;
+      resize: vertical;
+    }
+    input[type="submit"] {
+      cursor: pointer;
+      background-color: #4a90e2;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover {
+      background-color: #357abd;
+    }
+    .story-card {
+      border-left: 6px solid #4a90e2;
+      background: #f0f8ff;
+      margin-bottom: 1.5rem;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+    }
+    .story-title {
+      font-weight: bold;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: #355c7d;
+    }
+    .story-content {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #4a90e2;
+      color: white;
+      margin-top: 3rem;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        margin: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Good Deeds Stories — Share Your Daily Acts of Kindness
+  </header>
+
+  <main>
+    <section>
+      <h2>Share Your Story</h2>
+      <form id="storyForm">
+        <input type="text" id="title" placeholder="Story Title" required />
+        <select id="category" required>
+          <option value="">Select Category</option>
+          <option value="social-work">Social Work</option>
+          <option value="helping-hand">Helping Hand</option>
+          <option value="environmental">Environmental</option>
+          <option value="community">Community</option>
+        </select>
+        <textarea id="story" rows="5" placeholder="Describe your good work..." required></textarea>
+        <input type="text" id="location" placeholder="Location (optional)" />
+        <input type="submit" value="Submit Story" />
+      </form>
+    </section>
+
+    <section style="margin-top:3rem;">
+      <h2>Recent Stories</h2>
+      <div id="storiesFeed">
+        <div class="story-card">
+          <div class="story-title">Helping Elderly Neighbors</div>
+          <div class="story-content">
+            I helped my elderly neighbors with their groceries during the heavy rain. It made me feel grateful for the community support.
+          </div>
+        </div>
+        <div class="story-card">
+          <div class="story-title">Community Clean-up Drive</div>
+          <div class="story-content">
+            Organized a clean-up drive at the local park with friends to encourage environmental awareness.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Good Deeds Stories. All rights reserved.
+  </footer>
+
+  <script>
+    const form = document.getElementById('storyForm');
+    const storiesFeed = document.getElementById('storiesFeed');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const title = document.getElementById('title').value.trim();
+      const category = document.getElementById('category').value;
+      const story = document.getElementById('story').value.trim();
+      const location = document.getElementById('location').value.trim();
+
+      if (!title || !category || !story) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+
+      const newStory = document.createElement('div');
+      newStory.classList.add('story-card');
+
+      const storyTitle = document.createElement('div');
+      storyTitle.classList.add('story-title');
+      storyTitle.textContent = title + (location ? ` — ${location}` : '');
+
+      const storyContent = document.createElement('div');
+      storyContent.classList.add('story-content');
+      storyContent.textContent = story;
+
+      newStory.appendChild(storyTitle);
+      newStory.appendChild(storyContent);
+
+      storiesFeed.insertBefore(newStory, storiesFeed.firstChild);
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>
